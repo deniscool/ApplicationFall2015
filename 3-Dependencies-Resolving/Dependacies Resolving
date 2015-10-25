@@ -1,0 +1,95 @@
+import java.util.ArrayList;
+
+class Tree{
+	static ArrayList<durvo> arr = new ArrayList<durvo>();
+	static ArrayList<String> installed = new ArrayList<String>();
+	  
+	  public static void main(String[] args) {
+		  
+		 
+		  dependancies dep1 = new dependancies("Test","backbone");
+		  String prev = dep1.dep;
+			
+		  durvo queryJ = new durvo("queryJ",new durvo[]{});
+		  durvo lodash = new durvo("lodash",new durvo[]{});
+		  durvo jQuery = new durvo("jQuery",new durvo[]{queryJ});
+		  durvo underscore = new durvo("underscore",new durvo[]{lodash});
+		  durvo backbone = new durvo("backbone",new durvo[]{jQuery,underscore});
+		  
+		  
+		  installed.add("lodash");
+			arr.add(0,backbone);
+			arr.add(1,jQuery);
+			arr.add(2,underscore);
+			arr.add(3,queryJ);
+			arr.add(4,lodash);
+		
+		
+		  int c =0;
+		  
+		  System.out.println("Instaling "+prev);
+		  
+		  
+		  for(int i=0;i<arr.size();i++){
+			  if(arr.get(i).data.equals(prev))
+			  {
+			
+			  for(int j=0;j<arr.get(i).parent.length;j++){
+				  
+				  System.out.println("In order to install "+prev+" you need to install:");
+				  System.out.println(arr.get(i).parent[j].data);
+
+
+				  System.out.println("In ordred to install "+arr.get(i).parent[j].data+" you need to install:");
+				  for(int k=0;k<arr.get(i).parent[j].parent.length;k++){
+					
+					  System.out.println(arr.get(i).parent[j].parent[k].data);
+					
+					  for(int v = 0;v<installed.size();v++){
+						  if(arr.get(i).parent[j].parent[k].data.equals(installed.get(v)))
+								  System.out.println("Already installed");
+						  else  System.out.println("Installed");
+						}
+					  
+					  
+			  
+				  
+				  for(int p=0;p<arr.get(i).parent[j].parent[k].parent.length;p++){
+					  if(!arr.get(i).parent[j].parent[k].parent[p].data.equals(null)){
+						  c++;
+					
+						  System.out.println("In ordred to install "+arr.get(i).parent[j].parent[k].data+" you need to install:");
+						  System.out.println("arr.get(i).parent[j].parent[k].parent[p].data");
+					  }
+					  else  System.out.println("Installed");
+					  
+				  	}
+				 
+				     } 
+				  
+			    }
+			  }
+		  }
+	  }
+}
+
+	 class durvo{
+		String data;
+		durvo[] parent;
+		public durvo(String data, durvo[] parent){
+			this.data=data;
+			this.parent= parent;
+	
+		}
+		
+	}
+	 
+	 class dependancies {
+			String projName;
+			String dep;
+			
+			dependancies (String projName, String dep){
+				this.projName = projName;
+				this.dep = dep;
+			}
+		}
